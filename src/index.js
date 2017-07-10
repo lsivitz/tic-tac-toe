@@ -18,6 +18,7 @@ class Board extends React.Component {
             />
         );
     }
+
     render() {
         return (
             <div>
@@ -50,6 +51,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            squareNumber: 0,
         };
     }
 
@@ -68,6 +70,7 @@ class Game extends React.Component {
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
+            squareNumber: i,
         });
     }
 
@@ -86,7 +89,7 @@ class Game extends React.Component {
 
         const moves = history.map((step, move) => {
             const desc = move ?
-                'Move #' + move :
+                'Move: ' + makeCoordinates(this.state.squareNumber) :
                 'Game start';
             return (
                 <li key={move}>
@@ -144,4 +147,22 @@ function calculateWinner(squares) {
         }
     }
     return null;
+}
+
+function makeCoordinates(squareNumber) {
+    const coordinates = [
+        "1, 1", 
+        "1, 2",
+        "1, 3",
+        "2, 1",
+        "2, 2",
+        "2, 3",
+        "3, 1",
+        "3, 2",
+        "3, 3"
+    ];
+
+    return (
+        coordinates[(squareNumber)]   
+    );
 }
